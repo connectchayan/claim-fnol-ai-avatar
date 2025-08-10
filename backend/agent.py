@@ -9,7 +9,7 @@ from livekit.plugins import (
 from mcp_client import MCPServerSse
 from mcp_client.agent_tools import MCPToolsIntegration
 import os
-from tools import open_url
+from tools import open_url, getPolicyDetailsByPolicyNum, generateClaimReport
 from livekit.plugins import tavus
 load_dotenv()
 
@@ -17,7 +17,9 @@ load_dotenv()
 class Assistant(Agent):
     def __init__(self) -> None:
         super().__init__(instructions=AGENT_INSTRUCTION,
-                         tools=[open_url],)
+                         tools=[open_url,
+                                getPolicyDetailsByPolicyNum,
+                                generateClaimReport],)
 
 
 async def entrypoint(ctx: agents.JobContext):
@@ -26,27 +28,28 @@ async def entrypoint(ctx: agents.JobContext):
             voice="shimmer"
         )
     )
+#     mcp_server = MCPServerSse(
+#         params={"url": os.environ.get("N8N_MCP_SERVER_URL")},
+#         cache_tools_list=True,
+#         name="SSE MCP Server"
+#     )
+#
+#     agent = await MCPToolsIntegration.create_agent_with_tools(
+#         agent_class=Assistant,
+#         mcp_servers=[mcp_server]
+#     )
 
-    mcp_server = MCPServerSse(
-        params={"url": os.environ.get("N8N_MCP_SERVER_URL")},
-        cache_tools_list=True,
-        name="SSE MCP Server"
-    )
-
-    agent = await MCPToolsIntegration.create_agent_with_tools(
-        agent_class=Assistant,
-        mcp_servers=[mcp_server]
-    )
-
-    avatar = tavus.AvatarSession(
-      replica_id=os.environ.get("REPLICA_ID"),  
-      persona_id=os.environ.get("PERSONA_ID"),  
-      api_key=os.environ.get("TAVUS_API_KEY"),
-    )
+    # avatar = tavus.AvatarSession(
+    #   replica_id=os.environ.get("REPLICA_ID"),  
+    #   persona_id=os.environ.get("PERSONA_ID"),  
+    #   api_key=os.environ.get("TAVUS_API_KEY"),
+    # )
 
     # Start the avatar and wait for it to join
-    await avatar.start(session, room=ctx.room)
+    #await avatar.start(session, room=ctx.room)
 
+    # Instantiate the agent
+    agent = Assistant()
 
     await session.start(
         room=ctx.room,
@@ -55,6 +58,8 @@ async def entrypoint(ctx: agents.JobContext):
             # LiveKit Cloud enhanced noise cancellation
             # - If self-hosting, omit this parameter
             # - For telephony applications, use `BVCTelephony` for best results
+            video_enabled=True,
+            audio_enabled=True,
             noise_cancellation=noise_cancellation.BVC(),
         ),
     )

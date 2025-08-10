@@ -1,0 +1,39 @@
+[
+    {
+        "policyNumber": "AUTO123456",
+        "ownerName": "John Doe",
+        "policyStatus": "Active",
+        "beneficiaries": [
+            {
+                "type": "Primary",
+                "name": "Jane Doe",
+                "allocationPercentage": 100
+            },
+            {
+                "type": "Contingent",
+                "name": "Mark Smith",
+                "allocationPercentage": 30
+            }
+        ],
+        "automobile": {
+            "carModel": "Toyota Camry 2021",
+            "vinNumber": "1HGCM82633A123456"
+        }
+    },
+    {
+        "policyNumber": "AUTO654321",
+        "ownerName": "Alice Johnson",
+        "policyStatus": "Inforce",
+        "beneficiaries": [
+            {
+                "type": "Primary",
+                "name": "Bob Johnson",
+                "allocationPercentage": 100
+            }
+        ],
+        "automobile": {
+            "carModel": "Honda Accord 2020",
+            "vinNumber": "2T1BURHE5JC123789"
+        }
+    }
+]
