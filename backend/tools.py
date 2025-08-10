@@ -24,14 +24,16 @@ async def getPolicyDetailsByPolicyNum(policyNum: str, context: RunContext)-> str
 
     try:
         # Load the mock policy data from the JSON file
-        file_path = os.path.join(os.path.dirname(__file__),'mock_data', 'mock-policy.json')
+        file_path = os.path.join(os.path.dirname(__file__),'mock_data', 'mock-policy-list.json')
+        print(f"Loading policy details from {file_path}")
+        if not os.path.exists(file_path):
+            return f"Policy details file not found at {file_path}."
         with open(file_path, 'r') as file:
             policies = json.load(file)
 
         # Find the policy by policy number
         for policy in policies:
-
-            if policy['policy_number'] == policyNum and policy['policy_status'] != "In Force":
+            if policy['policyNumber'] == policyNum:
                 return json.dumps(policy)  # Return the policy details as a JSON string
 
         return "Policy not found."
@@ -42,7 +44,7 @@ async def getPolicyDetailsByPolicyNum(policyNum: str, context: RunContext)-> str
 @function_tool
 async def generateClaimReport(user_name: str, policy_number: str, incident_date: str, 
                               incident_time: str, incident_location: str, 
-                              incident_description: str, claim_type: str, context: RunContext) -> str:
+                              incident_description: str, claim_type: str, damageType: str, context: RunContext) -> str:
     """
     Look for claim-report.csv file under mock_data folder and write the claim report into claim-report.csv.
     This function is a placeholder for the actual implementation that would log the claim report.   
@@ -65,7 +67,7 @@ async def generateClaimReport(user_name: str, policy_number: str, incident_date:
             # Write the claim report data
             claim_number = f"CL-{policy_number}-{incident_date.replace('-', '')}-{incident_time.replace(':', '')}"
             writer.writerow([claim_number,user_name, policy_number, incident_date, incident_time, 
-                             incident_location, incident_description, claim_type])
+                             incident_location, incident_description, "Auto" ,damageType])
         
         return f"Claim report written to {file_path} successfully."
     except Exception as e:

@@ -35,5 +35,63 @@
             "carModel": "Honda Accord 2020",
             "vinNumber": "2T1BURHE5JC123789"
         }
+    },
+    {
+        "policyNumber": "AUTO789012",
+        "ownerName": "Michael Brown",
+        "policyStatus": "Active",
+        "beneficiaries": [
+            {
+                "type": "Primary",
+                "name": "Emily Brown",
+                "allocationPercentage": 100
+            },
+            {
+                "type": "Contingent",
+                "name": "Oliver Brown",
+                "allocationPercentage": 50
+            }
+        ],
+        "automobile": {
+            "carModel": "Ford Explorer 2022",
+            "vinNumber": "1FM5K8F81NGA56789"
+        }
+    },
+    {
+        "policyNumber": "AUTO345678",
+        "ownerName": "Sophia Wilson",
+        "policyStatus": "Lapsed",
+        "beneficiaries": [
+            {
+                "type": "Primary",
+                "name": "Liam Wilson",
+                "allocationPercentage": 100
+            }
+        ],
+        "automobile": {
+            "carModel": "Chevrolet Malibu 2019",
+            "vinNumber": "1G1ZD5STXKF123456"
+        }
+    },
+    {
+        "policyNumber": "AUTO567890",
+        "ownerName": "David Lee",
+        "policyStatus": "Active",
+        "beneficiaries": [
+            {
+                "type": "Primary",
+                "name": "Rachel Lee",
+                "allocationPercentage": 70
+            },
+            {
+                "type": "Contingent",
+                "name": "Samuel Lee",
+                "allocationPercentage": 30
+            }
+        ],
+        "automobile": {
+            "carModel": "Tesla Model 3 2023",
+            "vinNumber": "5YJ3E1EA5PF123456"
+        }
     }
 ]

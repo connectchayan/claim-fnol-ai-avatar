@@ -1,0 +1,2 @@
+claim_number,user_name,policy_number,incident_date,incident_time,incident_location,incident_description,claim_type,damage_type
+CL-AUTO123456-20250809-0709 PM,John Doe,AUTO123456,2025-08-09,07:09 PM,"New Town, Salt Lake, Kolkata","I was coming back from my office and I was standing at the crossing. There was a truck which was speeding and it hit me from behind.",Auto,Rear-End Collision
