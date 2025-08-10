@@ -27,7 +27,11 @@ const LiveKitWidget = ({ setShowSupport }) => {
   useEffect(() => {
     getToken();
   }, [getToken]);
-
+// Add this useEffect for logging
+  useEffect(() => {
+    console.log("Token:", token);
+    console.log("LiveKit URL:", import.meta.env.VITE_LIVEKIT_URL);
+  }, [token]);
   return (
     
     <div className="modal-content">

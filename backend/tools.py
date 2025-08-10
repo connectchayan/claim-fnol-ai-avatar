@@ -44,7 +44,7 @@ async def getPolicyDetailsByPolicyNum(policyNum: str, context: RunContext)-> str
 @function_tool
 async def generateClaimReport(user_name: str, policy_number: str, incident_date: str, 
                               incident_time: str, incident_location: str, 
-                              incident_description: str, claim_type: str, damageType: str, context: RunContext) -> str:
+                              incident_description: str, claim_type: str, damageType: str,damageDescription:str, context: RunContext) -> str:
     """
     Look for claim-report.csv file under mock_data folder and write the claim report into claim-report.csv.
     This function is a placeholder for the actual implementation that would log the claim report.   
@@ -62,12 +62,13 @@ async def generateClaimReport(user_name: str, policy_number: str, incident_date:
             if not file_exists:
                 # Write the header if the file is new
                 writer.writerow(['claim-number','user_name', 'policy_number', 'incident_date', 'incident_time', 
-                                 'incident_location', 'incident_description', 'claim_type','damage_type'])
+                                 'incident_location', 'incident_description', 'claim_type','damage_type','damage_description'])
             
             # Write the claim report data
             claim_number = f"CL-{policy_number}-{incident_date.replace('-', '')}-{incident_time.replace(':', '')}"
-            writer.writerow([claim_number,user_name, policy_number, incident_date, incident_time, 
-                             incident_location, incident_description, "Auto" ,damageType])
+            print(f"Writing claim report for {user_name} with claim number {claim_number} to {file_path}")
+            writer.writerow([claim_number, user_name, policy_number, incident_date, incident_time, 
+                             incident_location, incident_description, claim_type, damageType, damageDescription])
         
         return f"Claim report written to {file_path} successfully."
     except Exception as e:

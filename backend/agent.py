@@ -39,14 +39,14 @@ async def entrypoint(ctx: agents.JobContext):
 #         mcp_servers=[mcp_server]
 #     )
 
-    # avatar = tavus.AvatarSession(
-    #   replica_id=os.environ.get("REPLICA_ID"),  
-    #   persona_id=os.environ.get("PERSONA_ID"),  
-    #   api_key=os.environ.get("TAVUS_API_KEY"),
-    # )
+    avatar = tavus.AvatarSession(
+       replica_id=os.environ.get("REPLICA_ID"),  
+       persona_id=os.environ.get("PERSONA_ID"),  
+       api_key=os.environ.get("TAVUS_API_KEY"),
+    )
 
     # Start the avatar and wait for it to join
-    #await avatar.start(session, room=ctx.room)
+    await avatar.start(session, room=ctx.room)
 
     # Instantiate the agent
     agent = Assistant()

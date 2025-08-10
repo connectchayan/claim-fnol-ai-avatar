@@ -39,7 +39,7 @@ async def get_token():
             room_join=True,
             room=room
         ))
-    
+    print(f"Generated token{token.to_jwt} for {name} in room {room}")
     return token.to_jwt()
 
 if __name__ == "__main__":
